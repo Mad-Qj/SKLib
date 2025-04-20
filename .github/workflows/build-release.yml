@@ -19,7 +19,7 @@ env:
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-  BUILD_CONFIGURATION: Release
+  BUILD_CONFIGURATION: ReleaseWithSpoofer
   
   # Indicates the location of the vcpkg as a Git submodule of the project repository.
   # Not using "VCPKG_ROOT" because a variable with the same name is defined in the VS's
@@ -105,7 +105,7 @@ jobs:
           ${{ hashFiles( '.git/modules/vcpkg/HEAD' )}}
     - name: Compile Visual Studio project with MSBuild
       shell: cmd 
-      run: ${{ '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" && vcpkg integrate install && msbuild /p:Configuration=Release' }}
+      run: ${{ '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" && vcpkg integrate install && msbuild /p:Configuration=ReleaseWithSpoofer' }}
       working-directory: ${{env.SOLUTION_FILE_PATH}}
     - uses: actions/upload-artifact@v4
       with:
